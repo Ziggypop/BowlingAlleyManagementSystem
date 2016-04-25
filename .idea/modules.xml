@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BowlingAlleyManagementSystem.iml" filepath="$PROJECT_DIR$/BowlingAlleyManagementSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/BowlingAlleyManagementSystem1.iml" filepath="$PROJECT_DIR$/src/BowlingAlleyManagementSystem1.iml" />
     </modules>
   </component>
 </project>
