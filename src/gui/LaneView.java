@@ -21,7 +21,7 @@ public class LaneView implements LaneObserver, ActionListener {
 
 	JFrame frame;
 	Container cpanel;
-	Vector bowlers;
+	ArrayList bowlers;
 	int cur;
 	Iterator bowlIt;
 
@@ -167,11 +167,22 @@ public class LaneView implements LaneObserver, ActionListener {
 			}
 
 			int[][] lescores = le.getCumulScore();
+
+
+			//new Iterator functionality
+			Party currentParty = le.getParty();
+			CustomIterator partyIterator = currentParty.getIterator();
+			partyIterator.process(ballLabel);
+			//now the ballLabel gui should be updated
+			//all code for ballLabel below is not necessary, but the scoreLabel still needs to be updated
+
+
 			for (int k = 0; k < numBowlers; k++) {
 				for (int i = 0; i <= le.getFrameNum() - 1; i++) {
-					if (lescores[k][i] != 0)
+					if (lescores[k][i] != 0) {
 						scoreLabel[k][i].setText(
-							(new Integer(lescores[k][i])).toString());
+						(new Integer(lescores[k][i])).toString());
+					}
 				}
 				for (int i = 0; i < 21; i++) {
 					if (((int[]) ((HashMap) le.getScore())
@@ -193,13 +204,14 @@ public class LaneView implements LaneObserver, ActionListener {
 								&& i % 2 == 1)
 							ballLabel[k][i].setText("/");
 						else if ( ((int[])((HashMap) le.getScore()).get(bowlers.get(k)))[i] == -2 ){
-							
+							System.out.println("Set to F");
 							ballLabel[k][i].setText("F");
-						} else
+						} else {
 							ballLabel[k][i].setText(
-								(new Integer(((int[]) ((HashMap) le.getScore())
-									.get(bowlers.get(k)))[i]))
-									.toString());
+									(new Integer(((int[]) ((HashMap) le.getScore())
+											.get(bowlers.get(k)))[i]))
+											.toString());
+						}
 				}
 			}
 

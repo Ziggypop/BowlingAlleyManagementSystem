@@ -24,10 +24,10 @@ package Simulation;/*
 
 import java.util.*;
 
-public class Party {
+public class Party implements Collection{
 
 	/** Vector of bowlers in this party */	
-    private Vector myBowlers;
+    private ArrayList<Bowler> myBowlers;
 	
 	/**
 	 * Constructor for a Simulation.Party
@@ -35,8 +35,8 @@ public class Party {
 	 * @param bowlers	Vector of bowlers that are in this party
 	 */
 		
-    public Party( Vector bowlers ) {
-		myBowlers = new Vector(bowlers);
+    public Party( ArrayList<Bowler> bowlers ) {
+		myBowlers = new ArrayList<Bowler>(bowlers);
     }
 
 	/**
@@ -45,8 +45,17 @@ public class Party {
 	 * @return 	A vector of the bowlers in this party
 	 */
 
-    public Vector getMembers() {
+    public ArrayList<Bowler> getMembers() {
 		return myBowlers;
     }
+
+	public int getSize() {
+		return this.myBowlers.size();
+	}
+
+	@Override
+	public CustomIterator getIterator() {
+		return new PartyIterator(this);
+	}
 
 }

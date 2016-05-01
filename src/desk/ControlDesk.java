@@ -159,7 +159,7 @@ public class ControlDesk extends Thread {
      */
 
 	public void addPartyQueue(Vector partyNicks) {
-		Vector partyBowlers = new Vector();
+		ArrayList<Bowler> partyBowlers = new ArrayList<>();
 		for (int i = 0; i < partyNicks.size(); i++) {
 			Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
 			partyBowlers.add(newBowler);
@@ -176,11 +176,11 @@ public class ControlDesk extends Thread {
      *
      */
 
-	public Vector getPartyQueue() {
-		Vector displayPartyQueue = new Vector();
+	public ArrayList getPartyQueue() {
+		ArrayList displayPartyQueue = new ArrayList();
 		for ( int i=0; i < ( (Vector)partyQueue.asVector()).size(); i++ ) {
 			String nextParty =
-				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
+				((Bowler) ( ((Party) partyQueue.asVector().get( i ) ).getMembers())
 					.get(0))
 					.getNickName() + "'s Simulation.Party";
 			displayPartyQueue.addElement(nextParty);
