@@ -1,4 +1,4 @@
-/* ControlDeskObserver.java
+package desk;/* desk.ControlDeskObserver.java
  *
  *  Version
  *  $Id$

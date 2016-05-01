@@ -1,8 +1,10 @@
 package Simulation;
 
+import Lanes.Lane;
+
 public class Game {
 
-    private Status theStatus;
+    //private Status theStatus;
     private Lane onThisLane;
 
     public Game(Lane lane) {
@@ -10,7 +12,8 @@ public class Game {
     }
 
     public boolean hasNextTurn() {
-        // TODO
+        //TODO
+        return false;
     }
 
     public void nextTurn() {
@@ -30,7 +33,7 @@ public class Game {
 
 
         if (bowlerIterator.hasNext()) {
-            currentThrower = (Bowler)bowlerIterator.next();
+            currentThrower = (Simulation.Bowler)bowlerIterator.next();
 
             canThrowAgain = true;
             tenthFrameStrike = false;
@@ -45,7 +48,7 @@ public class Game {
                 try{
                     Date date = new Date();
                     String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-                    ScoreHistoryFile.addScore(currentThrower.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
+                    Scores.ScoreHistoryFile.addScore(currentThrower.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
                 } catch (Exception e) {System.err.println("Exception in addScore. "+ e );}
             }
 

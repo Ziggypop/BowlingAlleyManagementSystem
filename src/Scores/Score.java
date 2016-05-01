@@ -1,3 +1,5 @@
+package Scores;
+
 /**
  *
  * To change this generated comment edit the template variable "typecomment":
