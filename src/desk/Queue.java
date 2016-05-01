@@ -1,4 +1,4 @@
-/* Queue.java
+package desk;/* desk.Queue.java
  *
  *  Version
  *  $Id$
@@ -13,7 +13,7 @@ import java.util.Vector;
 public class Queue {
 	private Vector v;
 	
-	/** Queue()
+	/** desk.Queue()
 	 * 
 	 * creates a new queue
 	 */

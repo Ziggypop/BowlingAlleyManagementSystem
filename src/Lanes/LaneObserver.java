@@ -1,7 +1,7 @@
-/* $Id$
+package Lanes;/* $Id$
  *
  * Revisions:
- *   $Log: LaneObserver.java,v $
+ *   $Log: Lanes.LaneObserver.java,v $
  *   Revision 1.2  2003/01/30 21:44:25  ???
  *   Fixed speling of received in may places.
  *

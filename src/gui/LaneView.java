@@ -1,7 +1,13 @@
-/*
- *  constructs a prototype Lane View
+package gui;/*
+ *  constructs a prototype Lanes.Lanes View
  *
  */
+
+import Lanes.Lane;
+import Lanes.LaneEvent;
+import Lanes.LaneObserver;
+import Simulation.Bowler;
+import Simulation.Party;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -34,7 +40,7 @@ public class LaneView implements LaneObserver, ActionListener {
 		this.lane = lane;
 
 		initDone = true;
-		frame = new JFrame("Lane " + laneNum + ":");
+		frame = new JFrame("Lanes " + laneNum + ":");
 		cpanel = frame.getContentPane();
 		cpanel.setLayout(new BorderLayout());
 

@@ -1,4 +1,4 @@
-/* ControlDeskView.java
+package gui;/* gui.ControlDeskView.java
  *
  *  Version:
  *			$Id$
@@ -13,11 +13,16 @@
  *
  */
 
+import Lanes.Lane;
+import Pins.Pinsetter;
+import desk.ControlDesk;
+import desk.ControlDeskEvent;
+import desk.ControlDeskObserver;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 
 import java.util.*;
 
@@ -55,7 +60,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		controlsPanel.setLayout(new GridLayout(3, 1));
 		controlsPanel.setBorder(new TitledBorder("Controls"));
 
-		addParty = new JButton("Add Party");
+		addParty = new JButton("Add Simulation.Party");
 		JPanel addPartyPanel = new JPanel();
 		addPartyPanel.setLayout(new FlowLayout());
 		addParty.addActionListener(this);
@@ -76,10 +81,10 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		finishedPanel.add(finished);
 		controlsPanel.add(finishedPanel);
 
-		// Lane Status Panel
+		// Lanes.Lanes Status Panel
 		JPanel laneStatusPanel = new JPanel();
 		laneStatusPanel.setLayout(new GridLayout(numLanes, 1));
-		laneStatusPanel.setBorder(new TitledBorder("Lane Status"));
+		laneStatusPanel.setBorder(new TitledBorder("Lanes.Lanes Status"));
 
 		HashSet lanes=controlDesk.getLanes();
 		Iterator it = lanes.iterator();
@@ -90,14 +95,14 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 			curLane.subscribe(laneStat);
 			((Pinsetter)curLane.getPinsetter()).subscribe(laneStat);
 			JPanel lanePanel = laneStat.showLane();
-			lanePanel.setBorder(new TitledBorder("Lane" + ++laneCount ));
+			lanePanel.setBorder(new TitledBorder("Lanes" + ++laneCount ));
 			laneStatusPanel.add(lanePanel);
 		}
 
-		// Party Queue Panel
+		// Simulation.Party desk.Queue Panel
 		JPanel partyPanel = new JPanel();
 		partyPanel.setLayout(new FlowLayout());
-		partyPanel.setBorder(new TitledBorder("Party Queue"));
+		partyPanel.setBorder(new TitledBorder("Simulation.Party desk.Queue"));
 
 		Vector empty = new Vector();
 		empty.add("(Empty)");
@@ -159,7 +164,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 	/**
 	 * Receive a new party from andPartyView.
 	 *
-	 * @param addPartyView	the AddPartyView that is providing a new party
+	 * @param addPartyView	the gui.AddPartyView that is providing a new party
 	 *
 	 */
 
@@ -170,7 +175,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 	/**
 	 * Receive a broadcast from a ControlDesk
 	 *
-	 * @param ce	the ControlDeskEvent that triggered the handler
+	 * @param ce	the desk.ControlDeskEvent that triggered the handler
 	 *
 	 */
 
