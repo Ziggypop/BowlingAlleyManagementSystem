@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class StateContext {
     private SuperState state;
-    private int total;
     private ArrayList<BowlingFrame> frames;
 
     public StateContext(ArrayList<BowlingFrame> frames){

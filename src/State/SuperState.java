@@ -35,9 +35,15 @@ public abstract class SuperState {
         int roll2 = unwrapRollOrZero(frame, Second);
         int roll3 = unwrapRollOrZero(frame, Third);
 
+        //update previous scores due to current state
+        updatePrevScoreFromFirstRoll(roll1);
+        updatePrevScoreFromSecondRoll(roll2);
+
+
         // If it was a strike
         if (roll1 == MAX_FRAME_SCORE ){
-            //if this state is in a strike state
+
+            //if this state is already in a strike state
             if (this instanceof DoubleStrikeState || this instanceof StrikeState) {
                 //Then enter into a DoubleStrikeState.
                 context.setState(new DoubleStrikeState(context, frame, previousFrame));
@@ -46,7 +52,6 @@ public abstract class SuperState {
                 context.setState(new StrikeState(context, frame));
             }
             frame.addToFrameScore(roll1);
-            updatePrevScoreFromFirstRoll(roll1);
             return roll1;
         }
         // If it was a spare
@@ -54,15 +59,14 @@ public abstract class SuperState {
             //Enter into a SpareState
             context.setState(new SpareState(context, frame));
             frame.addToFrameScore(roll1+roll2);
-            updatePrevScoreFromFirstRoll(roll1);
-            updatePrevScoreFromSecondRoll(roll2);
+
             return roll1 + roll2;
         }
         //The frame was normal (0-9)
         else {
+            frame.addToFrameScore(roll1 + roll2 + roll3);
             context.setState(new NormalState(context));
             //Set this frame's score.
-            frame.addToFrameScore(roll1 + roll2 + roll3);
             return roll1 + roll2 + roll3;
         }
     }

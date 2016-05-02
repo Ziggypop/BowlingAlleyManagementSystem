@@ -17,6 +17,6 @@ public class StrikeState extends SuperState {
 
     @Override
     public void updatePrevScoreFromSecondRoll(int scoreToAdd) {
-        twicePreviousFrame.addToFrameScore(scoreToAdd);
+        previousFrame.addToFrameScore(scoreToAdd);
     }
 }

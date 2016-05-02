@@ -16,6 +16,7 @@ public class BowlingFrame {
 
 
     public BowlingFrame(boolean isLastFrame){
+        frameScore = 0;
         roll1 = null;
         roll2 = null;
         this.isLastFrame = isLastFrame;
@@ -85,5 +86,9 @@ public class BowlingFrame {
         First,
         Second,
         Third
+    }
+
+    public String toString(){
+        return String.format("roll1: %d, + roll2: %d, +roll3: %d, framescore=%d", roll1, roll2, roll3, frameScore);
     }
 }
