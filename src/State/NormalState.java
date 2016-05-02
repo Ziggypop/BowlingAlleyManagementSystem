@@ -8,9 +8,6 @@ public class NormalState extends SuperState {
         super(context, null, null);
     }
 
-    public int evaluateFrame(BowlingFrame frame) {
-        return super.evaluateFrame(frame);
-    }
 
     @Override
     public void updatePrevScoreFromFirstRoll(int scoreToAdd) {

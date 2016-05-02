@@ -29,7 +29,7 @@ public abstract class SuperState {
      * @return The _CURRENT_ value of the Frame between 0 and 10. This is not the final value of the frame
      *          (Which has a range of 0-30)
      */
-    public int evaluateFrame(BowlingFrame frame){
+    public void evaluateFrame(BowlingFrame frame){
         // Get the rolls from the frame.
         int roll1 = unwrapRollOrZero(frame, First);
         int roll2 = unwrapRollOrZero(frame, Second);
@@ -51,24 +51,19 @@ public abstract class SuperState {
                 //Enter into a StrikeState otherwise.
                 context.setState(new StrikeState(context, frame));
             }
-            frame.addToFrameScore(roll1);
-            return roll1;
         }
         // If it was a spare
         else if (roll1 + roll2 == MAX_FRAME_SCORE){
             //Enter into a SpareState
             context.setState(new SpareState(context, frame));
-            frame.addToFrameScore(roll1+roll2);
-
-            return roll1 + roll2;
         }
         //The frame was normal (0-9)
         else {
-            frame.addToFrameScore(roll1 + roll2 + roll3);
             context.setState(new NormalState(context));
-            //Set this frame's score.
-            return roll1 + roll2 + roll3;
         }
+        //Set this frame's score.
+        frame.addToFrameScore(roll1 + roll2 + roll3);
+
     }
 
     /**

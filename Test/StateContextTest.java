@@ -1,19 +1,20 @@
 
 import State.BowlingFrame;
 import State.StateContext;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by ziggypop on 4/30/16.
  */
 public class StateContextTest {
+
+    /**
+     * Basic test to see if frames can be created, updated, and calculated correctly.
+     * @throws Exception
+     */
     @Test
     public void calculateTotal() throws Exception {
         ArrayList<BowlingFrame> frames = new ArrayList<>();
@@ -31,42 +32,145 @@ public class StateContextTest {
 
 
     }
+
+    /**
+     * Tests a game where the bowler has bowler a few frames (Including strikes)
+     * @throws Exception
+     */
     @Test
     public void calculateTotalMany() throws Exception {
         ArrayList<BowlingFrame> frames = new ArrayList<>();
         StateContext context = new StateContext(frames);
 
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(5,0));
-        frames.add(frameFactory(0,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(5,0));
+        frames.add(frameFactoryMethod(0,0));
 
         int total = context.calculateTotal();
         Assert.assertEquals(total, 45);
     }
+    /**
+     * Tests a game where the bowler has bowled few frames (Strike and spare)
+     * @throws Exception
+     */
     @Test
-    public void calcualtePerfectGame() throws Exception{
+    public void calculateTotalManyAltOne() throws Exception {
         ArrayList<BowlingFrame> frames = new ArrayList<>();
         StateContext context = new StateContext(frames);
 
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,0));
+
+        int total = context.calculateTotal();
+        Assert.assertEquals(total, 40);
+    }
+
+    /**
+     * A test comprising mostly of spares
+     * @throws Exception
+     */
+    @Test
+    public void calculateTotalSparesOne() throws Exception {
+        ArrayList<BowlingFrame> frames = new ArrayList<>();
+        StateContext context = new StateContext(frames);
+
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,0));
+        frames.add(frameFactoryMethod(0,0));
+
+        int total = context.calculateTotal();
+        Assert.assertEquals(total, 125);
+    }
+
+    /**
+     * A test comprising mostly of spares.
+     * This differs from the first test when the 9th frame has a 0,5 instead of a 5,0
+     * This should test for the spares only counting the first roll of the next frame.
+     * @throws Exception
+     */
+    @Test
+    public void calculateTotalSparesTwo() throws Exception {
+        ArrayList<BowlingFrame> frames = new ArrayList<>();
+        StateContext context = new StateContext(frames);
+
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(5,5));
+        frames.add(frameFactoryMethod(0,5));
+        frames.add(frameFactoryMethod(0,0));
+
+        int total = context.calculateTotal();
+        Assert.assertEquals(total, 120);
+    }
+
+    /**
+     * Tests a game where the bowler bowls a perfect game.
+     * @throws Exception
+     */
+    @Test
+    public void calculatePerfectGame() throws Exception{
+        ArrayList<BowlingFrame> frames = new ArrayList<>();
+        StateContext context = new StateContext(frames);
+
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
         BowlingFrame lastFrame = new BowlingFrame(true);
+        lastFrame.addRoll(10);
         lastFrame.addRoll(10);
         lastFrame.addRoll(10);
         frames.add(lastFrame);
 
         int total = context.calculateTotal();
-        System.out.println(total);
         Assert.assertEquals(total, 300);
+    }
 
+    /**
+     * Tests a game where the bowler gets an almost prefect game.
+     * @throws Exception
+     */
+    @Test
+    public void calculateAlmostPerfectGame() throws Exception{
+        ArrayList<BowlingFrame> frames = new ArrayList<>();
+        StateContext context = new StateContext(frames);
+
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        BowlingFrame lastFrame = new BowlingFrame(true);
+        lastFrame.addRoll(10);
+        lastFrame.addRoll(10);
+        lastFrame.addRoll(0);
+        frames.add(lastFrame);
+
+        int total = context.calculateTotal();
+        Assert.assertEquals(total, 290);
     }
 
     @Test
@@ -74,23 +178,29 @@ public class StateContextTest {
         ArrayList<BowlingFrame> frames = new ArrayList<>();
         StateContext context = new StateContext(frames);
 
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
-        frames.add(frameFactory(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
+        frames.add(frameFactoryMethod(10,0));
 
         int total = context.calculateTotal();
         Assert.assertEquals(total, 240);
     }
 
 
-    //helper
-    private BowlingFrame frameFactory(int first, int second) throws BowlingFrame.FrameException {
+    /**
+     * Helper function that creates a Bowling frame in a simple manner.
+     * @param first The first roll
+     * @param second The second roll
+     * @return A new BowlingFrame.
+     * @throws BowlingFrame.FrameException
+     */
+    private BowlingFrame frameFactoryMethod(int first, int second) throws BowlingFrame.FrameException {
         BowlingFrame frame = new BowlingFrame(false);
         frame.addRoll(first);
         if (second + first <=10){
