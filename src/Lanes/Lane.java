@@ -136,7 +136,9 @@ import Pins.PinsetterEvent;
 import Pins.PinsetterObserver;
 import Simulation.Bowler;
 import Simulation.Game;
+import Simulation.HaltedGameState;
 import Simulation.Party;
+import gui.EndGamePrompt;
 
 import java.util.Vector;
 import java.util.Iterator;
@@ -147,8 +149,6 @@ public class Lane extends Thread implements PinsetterObserver {
 	private Pinsetter setter;
 	private HashMap scores;
 	private Vector subscribers;
-
-	private boolean gameIsHalted;
 
 	private boolean partyAssigned;
 	private Iterator bowlerIterator;
@@ -166,6 +166,12 @@ public class Lane extends Thread implements PinsetterObserver {
 
 	private Bowler currentThrower;			// = the thrower who just took a throw
 
+    /**
+     * The Game currently being played
+     */
+	private Game currentGame;
+
+
 	/** Lanes.Lanes()
 	 * 
 	 * Constructs a new lane and starts its thread
@@ -178,7 +184,6 @@ public class Lane extends Thread implements PinsetterObserver {
 		scores = new HashMap();
 		subscribers = new Vector();
 
-		gameIsHalted = false;
 		partyAssigned = false;
 
 		gameNumber = 0;
@@ -198,53 +203,47 @@ public class Lane extends Thread implements PinsetterObserver {
 				synchronized (this) {
 					wait(); //Thread waits until called to start the game
 				}
-			} catch (InterruptedException e) {e.printStackTrace();}
-			System.out.println("Running Lane!");
-            Game game = new Game(this);
-            while (game.hasNextTurn()) {
-                game.nextTurn();
+			} catch (InterruptedException e) {
+                System.out.println("Party assigned, Running Lane!");
+            }
+            currentGame = new Game(this);
+            while (currentGame.hasNextTurn()) {
+                currentGame.nextTurn();
             }
 
-            //TODO Run logic for finishing game
-            /*else if (partyAssigned && gameFinished) {
-                gui.EndGamePrompt egp = new gui.EndGamePrompt( ((Simulation.Bowler) party.getMembers().get(0)).getNickName() + "'s Simulation.Party" );
-                int result = egp.getResult();
-                egp.distroy();
-                egp = null;
+            //TODO Clean up logic for finishing game
+            EndGamePrompt egp = new EndGamePrompt(party.getMembers().get(0).getNickName() + "'s Party");
+            int choice = egp.getResult();
+            egp.distroy();
+            if (choice == 1) {					// yes, want to play again
+                resetScores();
+                resetBowlerIterator();
+            } else if (choice == 2) {// no, dont want to play another game
+                Vector printVector;
+                gui.EndGameReport egr = new gui.EndGameReport(party.getMembers().get(0).getNickName() + "'s Simulation.Party", party);
+                printVector = egr.getResult();
+                partyAssigned = false;
+                Iterator scoreIt = party.getMembers().iterator();
+                party = null;
+                partyAssigned = false;
 
-                System.out.println("result was: " + result);
+                publish(lanePublish());
 
-                if (result == 1) {					// yes, want to play again
-                    resetScores();
-                    resetBowlerIterator();
-
-                } else if (result == 2) {// no, dont want to play another game
-                    Vector printVector;
-                    gui.EndGameReport egr = new gui.EndGameReport( ((Simulation.Bowler)party.getMembers().get(0)).getNickName() + "'s Simulation.Party", party);
-                    printVector = egr.getResult();
-                    partyAssigned = false;
-                    Iterator scoreIt = party.getMembers().iterator();
-                    party = null;
-                    partyAssigned = false;
-
-                    publish(lanePublish());
-
-                    int myIndex = 0;
-                    while (scoreIt.hasNext()){
-                        Simulation.Bowler thisBowler = (Simulation.Bowler)scoreIt.next();
-                        Scores.ScoreReport sr = new Scores.ScoreReport( thisBowler, finalScores[myIndex++], gameNumber );
-                        sr.sendEmail(thisBowler.getEmail());
-                        Iterator printIt = printVector.iterator();
-                        while (printIt.hasNext()){
-                            if (thisBowler.getNick() == (String)printIt.next()){
-                                System.out.println("Printing " + thisBowler.getNick());
-                                sr.sendPrintout();
-                            }
+                int myIndex = 0;
+                while (scoreIt.hasNext()){
+                    Simulation.Bowler thisBowler = (Simulation.Bowler)scoreIt.next();
+                    Scores.ScoreReport sr = new Scores.ScoreReport( thisBowler, finalScores[myIndex++], gameNumber );
+                    sr.sendEmail(thisBowler.getEmail());
+                    Iterator printIt = printVector.iterator();
+                    while (printIt.hasNext()){
+                        if (thisBowler.getNick() == (String)printIt.next()){
+                            System.out.println("Printing " + thisBowler.getNick());
+                            sr.sendPrintout();
                         }
-
                     }
+
                 }
-            }*/
+            }
 		}
 	}
 
@@ -382,7 +381,17 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @return		The new lane event
 	 */
 	private LaneEvent lanePublish(  ) {
-		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, curScores, ball, gameIsHalted);
+		LaneEvent laneEvent = new LaneEvent(
+                party,
+                bowlIndex,
+                currentThrower,
+                cumulScores,
+                scores,
+                frameNumber+1,
+                curScores,
+                ball,
+                !(currentGame.getState() instanceof HaltedGameState)
+        );
 		return laneEvent;
 	}
 
@@ -563,7 +572,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * Pause the execution of this game
 	 */
 	public void pauseGame() {
-		gameIsHalted = true;
+        currentGame.pause();
 		publish(lanePublish());
 	}
 	
@@ -571,8 +580,12 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * Resume the execution of this game
 	 */
 	public void unPauseGame() {
-		gameIsHalted = false;
-		publish(lanePublish());
+        try {
+            currentGame.unpause();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        publish(lanePublish());
 	}
 
 }

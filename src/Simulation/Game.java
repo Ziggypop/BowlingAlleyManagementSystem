@@ -4,7 +4,9 @@ import Lanes.Lane;
 
 public class Game {
 
-    //private Status theStatus;
+
+    private GameState theState;
+
     private Lane onThisLane;
 
     public Game(Lane lane) {
@@ -12,26 +14,40 @@ public class Game {
     }
 
     public boolean hasNextTurn() {
-        //TODO
-        return false;
+        return theState.hasNextTurn();
     }
 
     public void nextTurn() {
-
+        theState.nextTurn();
     }
 
+    public void setState(GameState state) {
+        this.theState = state;
+    }
+
+    public GameState getState() {
+        return theState;
+    }
+
+    /**
+     * The state of the game before it was paused
+     */
+    private GameState prePause;
+
+    public void pause() {
+        prePause = theState;
+        setState(new HaltedGameState(this));
+    }
+
+    public void unpause() throws Exception {
+        if (prePause == null) {
+            throw new Exception("Can't unpause what hasn't been paused");
+        }
+        setState(prePause);
+        prePause = null;
+    }
 
     /*
-    if (partyAssigned && !gameFinished) {	// we have a party on this lane,
-        // so next bower can take a throw
-
-        while (gameIsHalted) {
-            try {
-                sleep(10);
-            } catch (Exception e) {}
-        }
-
-
         if (bowlerIterator.hasNext()) {
             currentThrower = (Simulation.Bowler)bowlerIterator.next();
 
