@@ -1,7 +1,9 @@
+package Simulation;
+
 /**
  * Created by Nick on 5/1/2016.
  */
-public interface Collection {
+public interface CustomCollection {
 
     public CustomIterator getIterator();
 

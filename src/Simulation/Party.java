@@ -24,7 +24,7 @@ package Simulation;/*
 
 import java.util.*;
 
-public class Party implements Collection{
+public class Party implements CustomCollection{
 
 	/** Vector of bowlers in this party */	
     private ArrayList<Bowler> myBowlers;

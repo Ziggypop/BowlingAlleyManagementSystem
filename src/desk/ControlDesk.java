@@ -183,7 +183,7 @@ public class ControlDesk extends Thread {
 				((Bowler) ( ((Party) partyQueue.asVector().get( i ) ).getMembers())
 					.get(0))
 					.getNickName() + "'s Simulation.Party";
-			displayPartyQueue.addElement(nextParty);
+			displayPartyQueue.add(nextParty);
 		}
 		return displayPartyQueue;
 	}

@@ -7,6 +7,7 @@ import Lanes.Lane;
 import Lanes.LaneEvent;
 import Lanes.LaneObserver;
 import Simulation.Bowler;
+import Simulation.CustomIterator;
 import Simulation.Party;
 
 import java.awt.*;
