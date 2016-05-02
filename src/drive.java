@@ -1,5 +1,6 @@
-import java.util.Vector;
-import java.io.*;
+import desk.Alley;
+import desk.ControlDesk;
+import gui.ControlDeskView;
 
 public class drive {
 
@@ -9,6 +10,7 @@ public class drive {
 		int maxPatronsPerParty=5;
 
 		Alley a = new Alley( numLanes );
+
 		ControlDesk controlDesk = a.getControlDesk();
 
 		ControlDeskView cdv = new ControlDeskView( controlDesk, maxPatronsPerParty);

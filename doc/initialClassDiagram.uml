@@ -2,12 +2,274 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes />
+  <nodes>
+    <node x="328.0" y="89.0">LaneEvent</node>
+    <node x="0.0" y="267.0">ControlDeskEvent</node>
+    <node x="559.0" y="89.0">ScoreReport</node>
+    <node x="0.0" y="677.0">ScoreHistoryFile</node>
+    <node x="773.7083333333333" y="366.0">LaneStatusView</node>
+    <node x="690.0" y="0.0">PinsetterEvent</node>
+    <node x="864.0416666666666" y="524.0">AddPartyView</node>
+    <node x="179.0" y="598.0">LaneEventInterface</node>
+    <node x="177.0" y="89.0">EndGameReport</node>
+    <node x="928.2083333333333" y="445.0">NewPatronView</node>
+    <node x="969.0" y="89.0">PinsetterObserver</node>
+    <node x="222.125" y="0.0">Party</node>
+    <node x="617.5416666666666" y="267.0">LaneView</node>
+    <node x="308.70361552028214" y="366.0">ControlDesk</node>
+    <node x="922.7083333333333" y="366.0">ControlDeskObserver</node>
+    <node x="374.0" y="598.0">LaneServer</node>
+    <node x="555.0" y="0.0">PrintableText</node>
+    <node x="745.6580357142857" y="188.0">LaneObserver</node>
+    <node x="707.0" y="89.0">Pinsetter</node>
+    <node x="768.2083333333333" y="445.0">ControlDeskView</node>
+    <node x="346.875" y="0.0">Bowler</node>
+    <node x="379.7536155202821" y="267.0">Queue</node>
+    <node x="972.0833333333333" y="267.0">PinSetterView</node>
+    <node x="444.0" y="89.0">BowlerFile</node>
+    <node x="582.0" y="188.0">Lane</node>
+    <node x="814.0" y="89.0">EndGamePrompt</node>
+    <node x="34.0" y="598.0">Score</node>
+    <node x="316.95361552028214" y="445.0">Alley</node>
+    <node x="431.74498456790116" y="524.0">drive</node>
+  </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <edges>
+    <edge source="EndGameReport" target="Party">
+      <point x="-32.75" y="-14.5" />
+      <point x="209.75" y="69.0" />
+      <point x="261.5" y="69.0" />
+      <point x="7.875" y="14.5" />
+    </edge>
+    <edge source="LaneStatusView" target="PinSetterView">
+      <point x="36.85714285714283" y="-14.5" />
+      <point x="875.0654761904761" y="336.0" />
+      <point x="1059.0833333333333" y="336.0" />
+      <point x="29.0" y="14.5" />
+    </edge>
+    <edge source="drive" target="Alley">
+      <point x="-15.75" y="-14.5" />
+      <point x="447.49498456790116" y="499.0" />
+      <point x="348.45361552028214" y="499.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="AddPartyView" target="NewPatronView">
+      <point x="14.625" y="-14.5" />
+      <point x="937.1666666666666" y="499.0" />
+      <point x="960.2083333333333" y="499.0" />
+      <point x="-32.0" y="14.5" />
+    </edge>
+    <edge source="Lane" target="PinsetterObserver">
+      <point x="27.111111111111114" y="-14.5" />
+      <point x="639.6111111111111" y="168.0" />
+      <point x="992.8333333333334" y="168.0" />
+      <point x="-47.66666666666666" y="14.5" />
+    </edge>
+    <edge source="Lane" target="Party">
+      <point x="-27.11111111111112" y="-14.5" />
+      <point x="585.3888888888889" y="168.0" />
+      <point x="166.5" y="168.0" />
+      <point x="166.5" y="59.0" />
+      <point x="245.75" y="59.0" />
+      <point x="-7.875" y="14.5" />
+    </edge>
+    <edge source="ControlDesk" target="Queue">
+      <point x="22.19999999999999" y="-14.5" />
+      <point x="386.40361552028213" y="336.0" />
+      <point x="433.7536155202821" y="336.0" />
+      <point x="18.0" y="14.5" />
+    </edge>
+    <edge source="LaneEvent" target="Party">
+      <point x="-23.75" y="-14.5" />
+      <point x="351.75" y="59.0" />
+      <point x="277.25" y="59.0" />
+      <point x="23.625" y="14.5" />
+    </edge>
+    <edge source="drive" target="ControlDeskView">
+      <point x="15.75" y="-14.5" />
+      <point x="478.99498456790116" y="499.0" />
+      <point x="791.5416666666666" y="499.0" />
+      <point x="-46.666666666666664" y="14.5" />
+    </edge>
+    <edge source="ControlDeskView" target="ControlDesk">
+      <point x="-46.66666666666666" y="-14.5" />
+      <point x="791.5416666666666" y="420.0" />
+      <point x="401.20361552028214" y="420.0" />
+      <point x="37.0" y="14.5" />
+    </edge>
+    <edge source="AddPartyView" target="ControlDeskView">
+      <point x="-43.875" y="-14.5" />
+      <point x="878.6666666666666" y="499.0" />
+      <point x="838.2083333333333" y="499.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ControlDeskView" target="LaneStatusView">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="LaneStatusView" target="LaneObserver">
+      <point x="0.0" y="-14.5" />
+      <point x="838.2083333333333" y="316.0" />
+      <point x="820.6580357142857" y="316.0" />
+      <point x="820.6580357142857" y="242.0" />
+      <point x="833.4080357142857" y="242.0" />
+      <point x="29.25" y="14.5" />
+    </edge>
+    <edge source="ScoreHistoryFile" target="Score">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Alley" target="ControlDesk">
+      <point x="15.75" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="NewPatronView" target="AddPartyView">
+      <point x="32.0" y="14.5" />
+      <point x="1024.2083333333333" y="499.0" />
+      <point x="966.4166666666666" y="499.0" />
+      <point x="43.875" y="-14.5" />
+    </edge>
+    <edge source="LaneStatusView" target="LaneView">
+      <point x="-36.85714285714286" y="-14.5" />
+      <point x="801.3511904761905" y="336.0" />
+      <point x="640.0416666666666" y="336.0" />
+      <point x="-22.5" y="14.5" />
+    </edge>
+    <edge source="Lane" target="ScoreReport">
+      <point x="-3.552713678800501E-15" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Lane" target="EndGamePrompt">
+      <point x="20.33333333333333" y="-14.5" />
+      <point x="632.8333333333334" y="158.0" />
+      <point x="881.5" y="158.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ControlDesk" target="ControlDeskEvent">
+      <point x="-44.40000000000002" y="-14.5" />
+      <point x="319.8036155202821" y="346.0" />
+      <point x="72.5" y="346.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ControlDeskView" target="AddPartyView">
+      <point x="46.666666666666686" y="14.5" />
+      <point x="884.875" y="499.0" />
+      <point x="907.9166666666666" y="499.0" />
+      <point x="-14.625" y="-14.5" />
+    </edge>
+    <edge source="Lane" target="EndGameReport">
+      <point x="-20.333333333333343" y="-14.5" />
+      <point x="592.1666666666666" y="158.0" />
+      <point x="242.5" y="158.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="LaneView" target="Lane">
+      <point x="-22.5" y="-14.5" />
+      <point x="640.0416666666666" y="242.0" />
+      <point x="632.8333333333334" y="242.0" />
+      <point x="20.33333333333333" y="14.5" />
+    </edge>
+    <edge source="Lane" target="Pinsetter">
+      <point x="6.7777777777777715" y="-14.5" />
+      <point x="619.2777777777778" y="138.0" />
+      <point x="728.75" y="138.0" />
+      <point x="-21.75" y="14.5" />
+    </edge>
+    <edge source="ScoreReport" target="PrintableText">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Lane" target="LaneEvent">
+      <point x="-13.555555555555564" y="-14.5" />
+      <point x="598.9444444444445" y="148.0" />
+      <point x="375.5" y="148.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="EndGameReport" target="Bowler">
+      <point x="32.75" y="-14.5" />
+      <point x="275.25" y="69.0" />
+      <point x="356.0" y="69.0" />
+      <point x="-27.375" y="14.5" />
+    </edge>
+    <edge source="ControlDesk" target="Party">
+      <point x="-22.200000000000045" y="-14.5" />
+      <point x="342.0036155202821" y="336.0" />
+      <point x="155.5" y="336.0" />
+      <point x="155.5" y="49.0" />
+      <point x="230.0" y="49.0" />
+      <point x="-23.625" y="14.5" />
+    </edge>
+    <edge source="LaneStatusView" target="Lane">
+      <point x="-55.28571428571428" y="-14.5" />
+      <point x="782.922619047619" y="346.0" />
+      <point x="601.5" y="346.0" />
+      <point x="601.5" y="242.0" />
+      <point x="612.5" y="242.0" />
+      <point x="-3.552713678800501E-15" y="14.5" />
+    </edge>
+    <edge source="Lane" target="Bowler">
+      <point x="-6.777777777777786" y="-14.5" />
+      <point x="605.7222222222222" y="138.0" />
+      <point x="433.5" y="138.0" />
+      <point x="433.5" y="59.0" />
+      <point x="392.5" y="59.0" />
+      <point x="9.125" y="14.5" />
+    </edge>
+    <edge source="LaneEvent" target="Bowler">
+      <point x="23.75" y="-14.5" />
+      <point x="399.25" y="69.0" />
+      <point x="374.25" y="69.0" />
+      <point x="-9.125" y="14.5" />
+    </edge>
+    <edge source="LaneStatusView" target="PinsetterObserver">
+      <point x="55.28571428571428" y="-14.5" />
+      <point x="893.4940476190476" y="346.0" />
+      <point x="1098.5833333333333" y="346.0" />
+      <point x="1098.5833333333333" y="168.0" />
+      <point x="1088.1666666666665" y="168.0" />
+      <point x="47.66666666666663" y="14.5" />
+    </edge>
+    <edge source="ControlDesk" target="Lane">
+      <point x="44.400000000000006" y="-14.5" />
+      <point x="408.6036155202821" y="346.0" />
+      <point x="590.5" y="346.0" />
+      <point x="590.5" y="242.0" />
+      <point x="592.1666666666666" y="242.0" />
+      <point x="-20.333333333333332" y="14.5" />
+    </edge>
+    <edge source="Pinsetter" target="PinsetterEvent">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="LaneView" target="LaneObserver">
+      <point x="22.5" y="-14.5" />
+      <point x="685.0416666666666" y="242.0" />
+      <point x="774.9080357142857" y="242.0" />
+      <point x="-29.25" y="14.5" />
+    </edge>
+    <edge source="ControlDeskView" target="ControlDeskObserver">
+      <point x="46.66666666666666" y="-14.5" />
+      <point x="884.875" y="420.0" />
+      <point x="1006.2083333333333" y="420.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="PinSetterView" target="PinsetterObserver">
+      <point x="0.0" y="-14.5" />
+      <point x="1030.0833333333333" y="168.0" />
+      <point x="1040.5" y="168.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="BowlerFile" target="Bowler">
+      <point x="0.0" y="-14.5" />
+      <point x="491.5" y="49.0" />
+      <point x="410.75" y="49.0" />
+      <point x="27.375" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="556.0" y="353.0" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
 </Diagram>
 
