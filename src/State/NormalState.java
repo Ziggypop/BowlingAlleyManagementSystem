@@ -4,7 +4,7 @@ package State;
  * Created by ziggypop on 4/29/16.
  */
 public class NormalState extends SuperState {
-    public NormalState(StateContext context) {
+    public NormalState(ScoreCalculatingStateContext context) {
         super(context, null, null);
     }
 

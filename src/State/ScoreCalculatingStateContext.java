@@ -4,12 +4,26 @@ import java.util.ArrayList;
 
 /**
  * Created by ziggypop on 4/29/16.
+ * The state Context will be created with an Arraylist of Bowling frames.
+ * These frames should belong to a player.
+ * Running calculateTotal, will run all of the frames through a state machine,
+ * updating all of the totals.
+ * CalculateTotal() will return a total of all frames.
+ *
+ * This State machine is not long running; one will be spawned for each set of
+ * frames to be evaluated.
+ *
  */
-public class StateContext {
+public class ScoreCalculatingStateContext {
+
     private SuperState state;
     private ArrayList<BowlingFrame> frames;
 
-    public StateContext(ArrayList<BowlingFrame> frames){
+    /**
+     *
+     * @param frames The frames you wish to evaluate.
+     */
+    public ScoreCalculatingStateContext(ArrayList<BowlingFrame> frames){
         state = new NormalState(this);
         this.frames = frames;
     }
@@ -18,6 +32,10 @@ public class StateContext {
         state = newState;
     }
 
+    /**
+     * Calculates the total of all of the current frames.
+     * @return A total of all of the BowlingFrames, with the modifications to addition applied by the state machine.
+     */
     public int calculateTotal(){
         setState(new NormalState(this));
         int total = 0;

@@ -6,9 +6,8 @@ package State;
  */
 public class StrikeState extends SuperState {
 
-    public StrikeState(StateContext context, BowlingFrame prevFrame){
+    public StrikeState(ScoreCalculatingStateContext context, BowlingFrame prevFrame){
         super(context, prevFrame, null);    }
-
 
     @Override
     public void updatePrevScoreFromFirstRoll(int scoreToAdd) {

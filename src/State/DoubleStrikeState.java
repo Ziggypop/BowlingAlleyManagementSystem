@@ -6,7 +6,7 @@ package State;
  */
 public class DoubleStrikeState extends SuperState {
 
-    public DoubleStrikeState(StateContext context, BowlingFrame prevFrame, BowlingFrame twicePrevFrame) {
+    public DoubleStrikeState(ScoreCalculatingStateContext context, BowlingFrame prevFrame, BowlingFrame twicePrevFrame) {
         super(context, prevFrame, twicePrevFrame);
     }
 

@@ -25,11 +25,11 @@ public class BowlingFrame {
 
     public void addRoll(int newRoll) throws FrameException{
         if (roll1 == null){
-            roll1 = (Integer) newRoll;
+            roll1 = newRoll;
         } else if (roll2 == null){
-            roll2 = (Integer) newRoll;
+            roll2 = newRoll;
         } else if (isLastFrame){
-            roll3 = (Integer) newRoll;
+            roll3 = newRoll;
         } else {
             throw new FrameException("The Frame is Full");
         }

@@ -5,7 +5,7 @@ package State;
  */
 public class SpareState extends SuperState {
 
-    public SpareState(StateContext context, BowlingFrame prevFrame){
+    public SpareState(ScoreCalculatingStateContext context, BowlingFrame prevFrame){
         super(context, prevFrame, null);
     }
 

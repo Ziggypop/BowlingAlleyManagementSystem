@@ -1,5 +1,4 @@
 package State;
-import State.BowlingFrame.RollEnum;
 import static State.BowlingFrame.RollEnum.First;
 import static State.BowlingFrame.RollEnum.Second;
 import static State.BowlingFrame.RollEnum.Third;
@@ -11,12 +10,12 @@ import static State.BowlingFrame.RollEnum.Third;
 public abstract class SuperState {
     public static final int MAX_FRAME_SCORE = 10;
 
-    private StateContext context;
+    private ScoreCalculatingStateContext context;
     BowlingFrame previousFrame;
     BowlingFrame twicePreviousFrame;
 
 
-    public SuperState(StateContext context, BowlingFrame prevFrame, BowlingFrame twicePrevFrame){
+    public SuperState(ScoreCalculatingStateContext context, BowlingFrame prevFrame, BowlingFrame twicePrevFrame){
         this.context = context;
         this.previousFrame = prevFrame;
         this.twicePreviousFrame = twicePrevFrame;

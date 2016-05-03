@@ -138,8 +138,11 @@ import Simulation.Bowler;
 import Simulation.Game;
 import Simulation.HaltedGameState;
 import Simulation.Party;
+import State.BowlingFrame;
+import State.ScoreCalculatingStateContext;
 import gui.EndGamePrompt;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.HashMap;
