@@ -17,6 +17,19 @@ public class Game {
         onThisLane = lane;
     }
 
+    private boolean began = false;
+
+    /**
+     * Begins the game
+     * @throws Exception cannot begin a game more than once
+     */
+    public void begin() throws Exception {
+        if (began) {
+            throw new Exception("Game can't start twice!");
+        }
+        theState = new PlayingGameState(this);
+    }
+
     public boolean hasNextTurn() {
         return theState.hasNextTurn();
     }
@@ -105,42 +118,5 @@ public class Game {
             }
         }
     }
-
-    /*
-        if (bowlerIterator.hasNext()) {
-            currentThrower = (Simulation.Bowler)bowlerIterator.next();
-
-            canThrowAgain = true;
-            tenthFrameStrike = false;
-            ball = 0;
-            while (canThrowAgain) {
-                setter.ballThrown();		// simulate the thrower's ball hiting
-                ball++;
-            }
-
-            if (frameNumber == 9){
-                finalScores[bowlIndex][gameNumber] = cumulScores[bowlIndex][9];
-                try{
-                    Date date = new Date();
-                    String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-                    Scores.ScoreHistoryFile.addScore(currentThrower.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
-                } catch (Exception e) {System.err.println("Exception in addScore. "+ e );}
-            }
-
-
-            setter.reset();
-            bowlIndex++;
-
-        } else {
-            frameNumber++;
-            resetBowlerIterator();
-            bowlIndex = 0;
-            if (frameNumber > 9) {
-                gameFinished = true;
-                gameNumber++;
-            }
-        }
-    }*/
-
 
 }

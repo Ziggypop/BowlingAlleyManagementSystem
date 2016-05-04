@@ -149,25 +149,25 @@ import java.util.HashMap;
 
 public class Lane extends Thread implements PinsetterObserver {
 	public Party party;
-	private Pinsetter setter;
+	public Pinsetter setter;
 	private HashMap scores;
 	private Vector subscribers;
 
 	public boolean partyAssigned;
-	private Iterator bowlerIterator;
-	private int ball;
-	private int bowlIndex;
-	private int frameNumber;
-	private boolean tenthFrameStrike;
+	public Iterator bowlerIterator;
+	public int ball;
+	public int bowlIndex;
+	public int frameNumber;
+	public boolean tenthFrameStrike;
 
 	private int[] curScores;
-	private int[][] cumulScores;
-	private boolean canThrowAgain;
+	public int[][] cumulScores;
+	public boolean canThrowAgain;
 
 	public int[][] finalScores;
 	public int gameNumber;
 
-	private Bowler currentThrower;			// = the thrower who just took a throw
+	public Bowler currentThrower;			// = the thrower who just took a throw
 
     /**
      * The Game currently being played
@@ -210,7 +210,12 @@ public class Lane extends Thread implements PinsetterObserver {
                 System.out.println("Party assigned, Running Lane!");
             }
             currentGame = new Game(this);
-            while (currentGame.hasNextTurn()) {
+			try {
+				currentGame.begin();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			while (currentGame.hasNextTurn()) {
                 currentGame.nextTurn();
             }
 			currentGame.end();
