@@ -148,12 +148,12 @@ import java.util.Iterator;
 import java.util.HashMap;
 
 public class Lane extends Thread implements PinsetterObserver {
-	private Party party;
+	public Party party;
 	private Pinsetter setter;
 	private HashMap scores;
 	private Vector subscribers;
 
-	private boolean partyAssigned;
+	public boolean partyAssigned;
 	private Iterator bowlerIterator;
 	private int ball;
 	private int bowlIndex;
@@ -164,8 +164,8 @@ public class Lane extends Thread implements PinsetterObserver {
 	private int[][] cumulScores;
 	private boolean canThrowAgain;
 
-	private int[][] finalScores;
-	private int gameNumber;
+	public int[][] finalScores;
+	public int gameNumber;
 
 	private Bowler currentThrower;			// = the thrower who just took a throw
 
@@ -213,40 +213,7 @@ public class Lane extends Thread implements PinsetterObserver {
             while (currentGame.hasNextTurn()) {
                 currentGame.nextTurn();
             }
-
-            //TODO Clean up logic for finishing game
-            EndGamePrompt egp = new EndGamePrompt(party.getMembers().get(0).getNickName() + "'s Party");
-            int choice = egp.getResult();
-            egp.distroy();
-            if (choice == 1) {					// yes, want to play again
-                resetScores();
-                resetBowlerIterator();
-            } else if (choice == 2) {// no, dont want to play another game
-                Vector printVector;
-                gui.EndGameReport egr = new gui.EndGameReport(party.getMembers().get(0).getNickName() + "'s Simulation.Party", party);
-                printVector = egr.getResult();
-                partyAssigned = false;
-                Iterator scoreIt = party.getMembers().iterator();
-                party = null;
-                partyAssigned = false;
-
-                publish(lanePublish());
-
-                int myIndex = 0;
-                while (scoreIt.hasNext()){
-                    Simulation.Bowler thisBowler = (Simulation.Bowler)scoreIt.next();
-                    Scores.ScoreReport sr = new Scores.ScoreReport( thisBowler, finalScores[myIndex++], gameNumber );
-                    sr.sendEmail(thisBowler.getEmail());
-                    Iterator printIt = printVector.iterator();
-                    while (printIt.hasNext()){
-                        if (thisBowler.getNick() == (String)printIt.next()){
-                            System.out.println("Printing " + thisBowler.getNick());
-                            sr.sendPrintout();
-                        }
-                    }
-
-                }
-            }
+			currentGame.end();
 		}
 	}
 
@@ -306,7 +273,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @pre the party as been assigned
 	 * @post the iterator points to the first bowler in the party
 	 */
-	private void resetBowlerIterator() {
+	public void resetBowlerIterator() {
 		bowlerIterator = (party.getMembers()).iterator();
 	}
 
@@ -317,7 +284,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @pre the party has been assigned
 	 * @post scoring system is initialized
 	 */
-	private void resetScores() {
+	public void resetScores() {
 		Iterator bowlIt = (party.getMembers()).iterator();
 
 		while ( bowlIt.hasNext() ) {
@@ -383,7 +350,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * 
 	 * @return		The new lane event
 	 */
-	private LaneEvent lanePublish(  ) {
+	public LaneEvent lanePublish() {
 		LaneEvent laneEvent = new LaneEvent(
                 party,
                 bowlIndex,
