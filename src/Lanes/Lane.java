@@ -381,6 +381,7 @@ public class Lane extends Thread implements PinsetterObserver {
     }
 
 
+
     /**
      *
      * @param scores
