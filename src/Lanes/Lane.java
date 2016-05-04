@@ -142,6 +142,8 @@ import State.BowlingFrame;
 import State.ScoreCalculatingStateContext;
 import gui.EndGamePrompt;
 
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Iterator;
@@ -370,7 +372,59 @@ public class Lane extends Thread implements PinsetterObserver {
 		return laneEvent;
 	}
 
-	/** getScore()
+
+	private int newGetScore(Bowler bowler, int frame){
+        int[] myScores = (int[]) scores.get(bowler);
+        ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
+        ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
+        return context.calculateTotal();
+    }
+
+
+    /**
+     *
+     * @param scores
+     * @return
+     */
+    private ArrayList<BowlingFrame> formatScoresToFrames(int[] scores) {
+        ArrayList<BowlingFrame> frames = new ArrayList<>();
+
+        boolean shouldCreateFrame = true;
+        BowlingFrame newFrame = new BowlingFrame(false);
+
+        for (int i = 0; i < 21; i++){
+            int score = scores[i];
+
+            if (shouldCreateFrame){
+                if (i < 18){
+                    newFrame = new BowlingFrame(false);
+                } else {
+                    newFrame = new BowlingFrame(true); // you are on the last frame
+                }
+                try {
+                    newFrame.addRoll(score);
+                } catch (BowlingFrame.FrameException e) {
+                    e.printStackTrace();
+                }
+                shouldCreateFrame = false;
+            } else {
+                try {
+                    newFrame.addRoll(score);
+                    frames.add(newFrame); // you have added
+                } catch (BowlingFrame.FrameException e) {
+                    e.printStackTrace();
+                }
+
+                if (i < 18){
+                    shouldCreateFrame = true;
+                }
+            }
+
+        }
+        return frames;
+    }
+
+    /** getScore()
 	 *
 	 * Method that calculates a bowlers score
 	 * 
