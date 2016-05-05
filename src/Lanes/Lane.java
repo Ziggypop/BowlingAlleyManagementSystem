@@ -373,14 +373,17 @@ public class Lane extends Thread implements PinsetterObserver {
 	}
 
 
-	private int newGetScore(Bowler bowler, int frame){
+	public int newGetScore(Bowler bowler, int frame){
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
         ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
         int currTotal = context.calculateTotal();
 
+        // work through each frame and set the score to the current total.
+        int total = 0;
         for (int i = 0; i < frames.size(); i++){
-            cumulScores[bowlIndex][i] = frames.get(i).getFrameScore();
+            total += frames.get(i).getFrameScore();
+            cumulScores[bowlIndex][i] = total;
         }
         return currTotal;
     }
@@ -443,7 +446,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * 
 	 * @return			The bowlers total score
 	 */
-	private int getScore(Bowler Cur, int frame) {
+	public int getScore(Bowler Cur, int frame) {
 		int[] curScore;
 		int strikeballs = 0;
 		int totalScore = 0;

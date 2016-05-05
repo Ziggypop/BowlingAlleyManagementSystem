@@ -61,7 +61,8 @@ public abstract class SuperState {
             context.setState(new NormalState(context));
         }
         //Set this frame's score.
-        frame.addToFrameScore(roll1 + roll2 + roll3);
+        int total = roll1 + roll2 + roll3;
+        frame.addToFrameScore(total);
 
     }
 
