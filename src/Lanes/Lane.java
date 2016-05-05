@@ -377,7 +377,12 @@ public class Lane extends Thread implements PinsetterObserver {
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
         ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
-        return context.calculateTotal();
+        int currTotal = context.calculateTotal();
+
+        for (int i = 0; i < frames.size(); i++){
+            cumulScores[bowlIndex][i] = frames.get(i).getFrameScore();
+        }
+        return currTotal;
     }
 
 
@@ -387,7 +392,8 @@ public class Lane extends Thread implements PinsetterObserver {
      * @param scores
      * @return
      */
-    private ArrayList<BowlingFrame> formatScoresToFrames(int[] scores) {
+    // This should be private, but it is public for the purpose of testing.
+    public static ArrayList<BowlingFrame> formatScoresToFrames(int[] scores) {
         ArrayList<BowlingFrame> frames = new ArrayList<>();
 
         boolean shouldCreateFrame = true;
