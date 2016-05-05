@@ -417,12 +417,15 @@ public class Lane extends Thread implements PinsetterObserver {
             } else {
                 try {
                     newFrame.addRoll(score);
-                    frames.add(newFrame); // you have added
+                    // DO NOT ADD TO THE COLLECTION IF YOU ARE ON THE LAST SCORE (this prevents double-adding the score)
+                    if ( i < 20) {
+                        frames.add(newFrame); // you have added the frame
+                    }
                 } catch (BowlingFrame.FrameException e) {
                     e.printStackTrace();
                 }
 
-                if (i < 18){
+                if (i < 18) {
                     shouldCreateFrame = true;
                 }
             }
