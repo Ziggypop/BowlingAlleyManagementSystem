@@ -233,7 +233,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @param frame This is useless TODO: remove this.
 	 * @return an int representing the total (this is useless)
      */
-	public int getScore(Bowler bowler, int frame){
+	private int getScore(Bowler bowler, int frame){
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
         ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
