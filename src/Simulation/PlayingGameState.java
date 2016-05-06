@@ -1,5 +1,7 @@
 package Simulation;
 
+import Lanes.Lane;
+
 import java.util.Date;
 
 /**
@@ -17,36 +19,38 @@ public class PlayingGameState extends GameState {
 
     @Override
     public void nextTurn() {
-        if (theGame.getLane().bowlerIterator.hasNext()) {
-            theGame.getLane().currentThrower = (Bowler)theGame.getLane().bowlerIterator.next();
+        Lane lane = theGame.getLane();
 
-            theGame.getLane().canThrowAgain = true;
-            theGame.getLane().tenthFrameStrike = false;
-            theGame.getLane().ball = 0;
-            while (theGame.getLane().canThrowAgain) {
-                theGame.getLane().setter.ballThrown();		// simulate the thrower's ball hiting
-                theGame.getLane().ball++;
+        if (theGame.getBowlerIterator().hasNext()) {
+            theGame.setCurrentThrower((Bowler)theGame.getBowlerIterator().next());
+
+            lane.canThrowAgain = true;
+            lane.tenthFrameStrike = false;
+            theGame.setBall(0);
+            while (lane.canThrowAgain) {
+                lane.setter.ballThrown();		// simulate the thrower's ball hiting
+                theGame.setBall(theGame.getBall() + 1);
             }
 
-            if (theGame.getLane().frameNumber == 9){
-                theGame.getLane().finalScores[theGame.getLane().bowlIndex][theGame.getLane().gameNumber] = theGame.getLane().cumulScores[theGame.getLane().bowlIndex][9];
+            if (lane.frameNumber == 9){
+                lane.finalScores[lane.bowlIndex][lane.gameNumber] = lane.cumulScores[lane.bowlIndex][9];
                 try{
                     Date date = new Date();
                     String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-                    Scores.ScoreHistoryFile.addScore(theGame.getLane().currentThrower.getNick(), dateString, new Integer(theGame.getLane().cumulScores[theGame.getLane().bowlIndex][9]).toString());
+                    Scores.ScoreHistoryFile.addScore(theGame.getCurrentThrower().getNick(), dateString, new Integer(lane.cumulScores[lane.bowlIndex][9]).toString());
                 } catch (Exception e) {System.err.println("Exception in addScore. "+ e );}
             }
 
 
-            theGame.getLane().setter.reset();
-            theGame.getLane().bowlIndex++;
+            lane.setter.reset();
+            lane.bowlIndex++;
 
         } else {
-            theGame.getLane().frameNumber++;
-            theGame.getLane().resetBowlerIterator();
-            theGame.getLane().bowlIndex = 0;
-            if (theGame.getLane().frameNumber > 9) {
-                theGame.getLane().gameNumber++;
+            lane.frameNumber++;
+            theGame.setBowlerIterator(lane.party.getMembers().iterator());
+            lane.bowlIndex = 0;
+            if (lane.frameNumber > 9) {
+                lane.gameNumber++;
             }
         }
     }
