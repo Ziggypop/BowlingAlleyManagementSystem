@@ -43,7 +43,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		// Member Panel
 		JPanel partyPanel = new JPanel();
 		partyPanel.setLayout(new FlowLayout());
-		partyPanel.setBorder(new TitledBorder("Simulation.Party Members"));
+		partyPanel.setBorder(new TitledBorder("Party Members"));
 		
 		Vector myVector = new Vector();
 		Iterator iter = (party.getMembers()).iterator();

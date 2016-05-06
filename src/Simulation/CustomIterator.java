@@ -1,5 +1,7 @@
 package Simulation;
 
+import Lanes.LaneEvent;
+
 import javax.swing.*;
 
 /**
@@ -10,5 +12,5 @@ public interface CustomIterator {
 
     Object next();
 
-    void process(JLabel[][] ballLabel);
+    void process(LaneEvent event, JLabel[][] ballLabel, JLabel[][] scoreLabel);
 }

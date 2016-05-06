@@ -65,13 +65,13 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		viewLane = new JButton("View Lanes.Lanes");
+		viewLane = new JButton("View Lanes");
 		JPanel viewLanePanel = new JPanel();
 		viewLanePanel.setLayout(new FlowLayout());
 		viewLane.addActionListener(this);
 		viewLanePanel.add(viewLane);
 
-		viewPinSetter = new JButton("Pins.Pinsetter");
+		viewPinSetter = new JButton("Pinsetter");
 		JPanel viewPinSetterPanel = new JPanel();
 		viewPinSetterPanel.setLayout(new FlowLayout());
 		viewPinSetter.addActionListener(this);
