@@ -60,7 +60,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		controlsPanel.setLayout(new GridLayout(3, 1));
 		controlsPanel.setBorder(new TitledBorder("Controls"));
 
-		addParty = new JButton("Add Simulation.Party");
+		addParty = new JButton("Add Party");
 		JPanel addPartyPanel = new JPanel();
 		addPartyPanel.setLayout(new FlowLayout());
 		addParty.addActionListener(this);
@@ -84,7 +84,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		// Lanes.Lanes Status Panel
 		JPanel laneStatusPanel = new JPanel();
 		laneStatusPanel.setLayout(new GridLayout(numLanes, 1));
-		laneStatusPanel.setBorder(new TitledBorder("Lanes.Lanes Status"));
+		laneStatusPanel.setBorder(new TitledBorder("Lanes Status"));
 
 		HashSet lanes=controlDesk.getLanes();
 		Iterator it = lanes.iterator();
@@ -102,7 +102,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
 		// Simulation.Party desk.Queue Panel
 		JPanel partyPanel = new JPanel();
 		partyPanel.setLayout(new FlowLayout());
-		partyPanel.setBorder(new TitledBorder("Simulation.Party desk.Queue"));
+		partyPanel.setBorder(new TitledBorder("Party Queue"));
 
 		Vector empty = new Vector();
 		empty.add("(Empty)");
