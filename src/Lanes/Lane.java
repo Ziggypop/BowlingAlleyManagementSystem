@@ -373,14 +373,33 @@ public class Lane extends Thread implements PinsetterObserver {
 	}
 
 
-	private int newGetScore(Bowler bowler, int frame){
+	/**
+	 * This is the refactored getScore()
+	 * It still exhibits terrible design.
+	 * Because the cumulative scores are stored in a class variable, and associated with the given Bowler via a HashMap.
+	 * This makes it hard to fully refactor the scores into BowlingFrames that are held within the Bowler - because
+	 * that makes sense.
+	 * This would allow the BowlingFrames to be persistent, allowing the StateMachine to be persistent for each Bowler.
+	 * This is opposed to the current setup where the StateMachine needs to be created each time; and has to calculate
+	 * all previous frames to get the current one.
+	 *
+	 * Also, this returns an int; it doesn't need to.
+	 *
+	 * @param bowler The Bowler we are getting the scores for
+	 * @param frame This is useless TODO: remove this.
+	 * @return an int representing the total (this is useless)
+     */
+	public int newGetScore(Bowler bowler, int frame){
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
         ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
         int currTotal = context.calculateTotal();
 
+        // work through each frame and set the score to the current total.
+        int total = 0;
         for (int i = 0; i < frames.size(); i++){
-            cumulScores[bowlIndex][i] = frames.get(i).getFrameScore();
+            total += frames.get(i).getFrameScore();
+            cumulScores[bowlIndex][i] = total;
         }
         return currTotal;
     }
@@ -389,8 +408,8 @@ public class Lane extends Thread implements PinsetterObserver {
 
     /**
      *
-     * @param scores
-     * @return
+     * @param scores an array of scores that will be packaged into frames
+     * @return An ArrayList of BowlingFrames
      */
     // This should be private, but it is public for the purpose of testing.
     public static ArrayList<BowlingFrame> formatScoresToFrames(int[] scores) {
@@ -443,7 +462,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * 
 	 * @return			The bowlers total score
 	 */
-	private int getScore(Bowler Cur, int frame) {
+	public int getScore(Bowler Cur, int frame) {
 		int[] curScore;
 		int strikeballs = 0;
 		int totalScore = 0;

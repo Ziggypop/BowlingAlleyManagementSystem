@@ -45,14 +45,14 @@ public class LaneTest {
 
         ArrayList<BowlingFrame> frames = Lane.formatScoresToFrames(scores);
 
-        System.out.println("number of frames: " + frames.size());
-
-        int count = 0;
-        for (BowlingFrame frame : frames){
-
-            System.out.println("Frame "+ count +": " + frame.toString());
-            count++;
-        }
+//        System.out.println("number of frames: " + frames.size());
+//
+//        int count = 0;
+//        for (BowlingFrame frame : frames){
+//
+//            System.out.println("Frame "+ count +": " + frame.toString());
+//            count++;
+//        }
 
         int frameFirstRoll1 = frames.get(0).getRoll1();
 
@@ -66,6 +66,23 @@ public class LaneTest {
         Assert.assertEquals(scores[20], frameLastRoll3);
 
         Assert.assertEquals(frames.size(), 10);
+
+    }
+
+    @Test
+    public void CompareGetScoreMethods(){
+        int[] scores = new int[21];
+        for (int i = 0; i < 21; i++) {
+            scores[i] = 0;
+        }
+        scores[0] = 3;
+        scores[18] = 10;
+        scores[19] = 10;
+        scores[20] = 5;
+
+        Lane lane = new Lane();
+        // This is impossible to test given how stateful the Lane class is.
+        //I give up
 
     }
 
