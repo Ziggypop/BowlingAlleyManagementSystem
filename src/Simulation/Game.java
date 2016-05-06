@@ -100,9 +100,7 @@ public class Game {
                     onThisLane.party
             );
             printVector = egr.getResult();
-            onThisLane.party = null;
             Iterator scoreIt = onThisLane.party.getMembers().iterator();
-            onThisLane.party = null;
             onThisLane.party = null;
 
             onThisLane.publish(onThisLane.lanePublish());
