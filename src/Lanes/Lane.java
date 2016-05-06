@@ -191,7 +191,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	
 		curScore[ index - 1] = score;
 		scores.put(Cur, curScore);
-		newGetScore( Cur, frame );
+		getScore( Cur, frame );
 		publish( lanePublish() );
 	}
 
@@ -233,7 +233,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @param frame This is useless TODO: remove this.
 	 * @return an int representing the total (this is useless)
      */
-	public int newGetScore(Bowler bowler, int frame){
+	public int getScore(Bowler bowler, int frame){
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
         ScoreCalculatingStateContext context = new ScoreCalculatingStateContext(frames);
