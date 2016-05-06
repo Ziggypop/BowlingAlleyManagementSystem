@@ -272,7 +272,6 @@ public class Lane extends Thread implements PinsetterObserver {
                     newFrame = new BowlingFrame(true); // you are on the last frame
                 }
                 try {
-					System.out.println(score);
 					newFrame.addRoll(score);
                 } catch (BowlingFrame.FrameException e) {
                     e.printStackTrace();
@@ -280,7 +279,6 @@ public class Lane extends Thread implements PinsetterObserver {
                 shouldCreateFrame = false;
             } else {
                 try {
-					System.out.println(score);
 					newFrame.addRoll(score);
                     // DO NOT ADD TO THE COLLECTION IF YOU ARE ON THE LAST SCORE (this prevents double-adding the score)
                     if ( i < 20) {
