@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class Game {
 
+    private Bowler currentThrower;			// = the thrower who just took a throw
+
+    private int ball;
 
     private GameState theState;
 
@@ -19,6 +22,8 @@ public class Game {
 
     private boolean began = false;
 
+    private Iterator bowlerIterator;
+
     /**
      * Begins the game
      * @throws Exception cannot begin a game more than once
@@ -28,6 +33,7 @@ public class Game {
             throw new Exception("Game can't start twice!");
         }
         theState = new PlayingGameState(this);
+        setBowlerIterator(onThisLane.party.getMembers().iterator());
     }
 
     public boolean hasNextTurn() {
@@ -87,7 +93,6 @@ public class Game {
         egp.distroy();
         if (choice == 1) {					// yes, want to play again
             onThisLane.resetScores();
-            onThisLane.resetBowlerIterator();
         } else if (choice == 2) {// no, dont want to play another game
             Vector printVector;
             gui.EndGameReport egr = new gui.EndGameReport(
@@ -95,10 +100,8 @@ public class Game {
                     onThisLane.party
             );
             printVector = egr.getResult();
-            onThisLane.partyAssigned = false;
             Iterator scoreIt = onThisLane.party.getMembers().iterator();
             onThisLane.party = null;
-            onThisLane.partyAssigned = false;
 
             onThisLane.publish(onThisLane.lanePublish());
 
@@ -119,4 +122,27 @@ public class Game {
         }
     }
 
+    public int getBall() {
+        return ball;
+    }
+
+    protected void setBall(int ball) {
+        this.ball = ball;
+    }
+
+    public Bowler getCurrentThrower() {
+        return currentThrower;
+    }
+
+    protected void setCurrentThrower(Bowler currentThrower) {
+        this.currentThrower = currentThrower;
+    }
+
+    public Iterator getBowlerIterator() {
+        return bowlerIterator;
+    }
+
+    protected void setBowlerIterator(Iterator bowlerIterator) {
+        this.bowlerIterator = bowlerIterator;
+    }
 }
