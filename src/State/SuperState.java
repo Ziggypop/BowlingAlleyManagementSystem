@@ -22,7 +22,6 @@ public abstract class SuperState {
     }
 
     /**
-     * TODO: Account for the 10th frame
      * Calculates the value of a current frame and updates the previous frames based on the current state.
      * @param frame The frame from which the rolls are extracted.
      * @return The _CURRENT_ value of the Frame between 0 and 10. This is not the final value of the frame

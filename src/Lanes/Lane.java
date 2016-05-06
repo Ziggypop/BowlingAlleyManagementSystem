@@ -373,6 +373,22 @@ public class Lane extends Thread implements PinsetterObserver {
 	}
 
 
+	/**
+	 * This is the refactored getScore()
+	 * It still exhibits terrible design.
+	 * Because the cumulative scores are stored in a class variable, and associated with the given Bowler via a HashMap.
+	 * This makes it hard to fully refactor the scores into BowlingFrames that are held within the Bowler - because
+	 * that makes sense.
+	 * This would allow the BowlingFrames to be persistent, allowing the StateMachine to be persistent for each Bowler.
+	 * This is opposed to the current setup where the StateMachine needs to be created each time; and has to calculate
+	 * all previous frames to get the current one.
+	 *
+	 * Also, this returns an int; it doesn't need to.
+	 *
+	 * @param bowler The Bowler we are getting the scores for
+	 * @param frame This is useless TODO: remove this.
+	 * @return an int representing the total (this is useless)
+     */
 	public int newGetScore(Bowler bowler, int frame){
         int[] myScores = (int[]) scores.get(bowler);
         ArrayList<BowlingFrame> frames = formatScoresToFrames(myScores);
@@ -392,8 +408,8 @@ public class Lane extends Thread implements PinsetterObserver {
 
     /**
      *
-     * @param scores
-     * @return
+     * @param scores an array of scores that will be packaged into frames
+     * @return An ArrayList of BowlingFrames
      */
     // This should be private, but it is public for the purpose of testing.
     public static ArrayList<BowlingFrame> formatScoresToFrames(int[] scores) {
