@@ -133,7 +133,6 @@ public class LaneView implements LaneObserver, ActionListener {
 		if (lane.isPartyAssigned()) {
 			int numBowlers = le.getParty().getMembers().size();
 			while (!initDone) {
-				//System.out.println("chillin' here.");
 				try {
 					Thread.sleep(1);
 				} catch (Exception e) {
@@ -170,52 +169,10 @@ public class LaneView implements LaneObserver, ActionListener {
 			int[][] lescores = le.getCumulScore();
 
 
-			//new Iterator functionality
+			//new Iterator functionality, create iterator, pass gui score labels to be changed
 			Party currentParty = le.getParty();
 			CustomIterator partyIterator = currentParty.getIterator();
 			partyIterator.process(le, ballLabel, scoreLabel);
-			//now the ballLabel gui should be updated
-			//all code for ballLabel below is not necessary, but the scoreLabel still needs to be updated
-
-
-//			for (int k = 0; k < numBowlers; k++) { //for all bowlers in the party
-//				for (int i = 0; i <= le.getFrameNum() - 1; i++) { //for all frames for each bowler
-//					if (lescores[k][i] != 0) { //if their score for the frame is not 0
-//						scoreLabel[k][i].setText(
-//						(new Integer(lescores[k][i])).toString()); //set their score to the correct number
-//					}
-//				}
-//				for (int i = 0; i < 21; i++) { //look through bowlers' scores for each frame
-//					//System.out.println(((int[]) ((HashMap) le.getScore()).get(bowlers.get(k)))[i]);
-//					if (((int[]) ((HashMap) le.getScore())
-//						.get(bowlers.get(k)))[i]
-//						!= -1)
-//						if (((int[]) ((HashMap) le.getScore())
-//							.get(bowlers.get(k)))[i]
-//							== 10
-//							&& (i % 2 == 0 || i == 19))
-//							ballLabel[k][i].setText("X");
-//						else if (
-//							i > 0
-//								&& ((int[]) ((HashMap) le.getScore())
-//									.get(bowlers.get(k)))[i]
-//									+ ((int[]) ((HashMap) le.getScore())
-//										.get(bowlers.get(k)))[i
-//									- 1]
-//									== 10
-//								&& i % 2 == 1)
-//							ballLabel[k][i].setText("/");
-//						else if ( ((int[])((HashMap) le.getScore()).get(bowlers.get(k)))[i] == -2 ){
-//							System.out.println("Set to F");
-//							ballLabel[k][i].setText("F");
-//						} else {
-//							ballLabel[k][i].setText(
-//									(new Integer(((int[]) ((HashMap) le.getScore())
-//											.get(bowlers.get(k)))[i]))
-//											.toString());
-//						}
-//				}
-//			}
 
 		}
 	}

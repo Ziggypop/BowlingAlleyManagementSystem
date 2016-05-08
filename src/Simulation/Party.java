@@ -1,3 +1,6 @@
+/**
+ * Party.java
+ */
 package Simulation;/*
  * Simulation.Party.java
  *
@@ -53,6 +56,10 @@ public class Party implements CustomCollection{
 		return this.myBowlers.size();
 	}
 
+	/**
+	 * Returns the iterator for this class
+	 * @return the iterator generated for this class
+	 */
 	@Override
 	public CustomIterator getIterator() {
 		return new PartyIterator(this);
